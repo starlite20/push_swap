@@ -1,7 +1,7 @@
 #ifndef PUSH_SWAP
 #define PUSH_SWAP
 
-#include<stdlib.h>
+#include <stdlib.h>
 #include "libft/libft.h"
 
 
@@ -24,6 +24,6 @@ int stack_pop(t_stack *stack);
 void stack_print(t_stack *stack);
 void stack_clear(t_stack *stack);
 
-void ft_puterr(char *str);
+void ft_puterr_exit(char *str);
 
 #endif

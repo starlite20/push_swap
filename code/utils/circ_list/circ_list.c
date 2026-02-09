@@ -64,8 +64,7 @@ int stack_pop(t_stack *stack)
 
 	if(!node_to_pop)
 	{
-		ft_puterr("Error: Attempting to Pop an Empty Stack");
-		exit(0);
+		ft_puterr_exit("Error: Attempting to Pop an Empty Stack");
 	}
 
 	value = node_to_pop->value;
