@@ -1,10 +1,5 @@
-#include "libft/libft.h"
+#include "../push_swap.h"
 
-
-void ft_puterr(char *str)
-{
-	ft_putstr_fd(str, 2);
-}
 
 int validate_input(int count, char** input)
 {

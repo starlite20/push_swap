@@ -25,10 +25,8 @@ t_stack *stack_init()
 	stack->head = NULL;
 	stack->size = 0;
 
-	return(t_stack);
+	return(stack);
 }
-
-
 
 void stack_push(t_stack *stack, int value)
 {
@@ -60,11 +58,30 @@ int stack_pop(t_stack *stack)
 {
 	int value;
 	t_node *node_to_pop;
+	t_node *tail;
 
 	node_to_pop = stack->head;
+
+	if(!node_to_pop)
+	{
+		ft_puterr("Error: Attempting to Pop an Empty Stack");
+		exit(0);
+	}
+
 	value = node_to_pop->value;
 
-	node_to_pop->prev->next = node_to_pop->next;
+	if(stack->size == 1)
+		stack->head = NULL;
+	else
+	{
+		tail = stack->head->prev;
+		tail->next = stack->head->next;
+
+		stack->head = node_to_pop->next;
+		stack->head->prev = tail;
+	}
+	stack->size -= 1;
+
 	free(node_to_pop);
 	return(value);
 }
@@ -85,9 +102,4 @@ void stack_print(t_stack *stack)
 		nodes_iterated++;
 	}
 	ft_printf("\n");
-}
-
-int stack_size(t_stack *stack)
-{
-	// i wont be needing this right? as i have the size updated on the structure always...?	
 }

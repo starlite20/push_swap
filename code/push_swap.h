@@ -2,6 +2,8 @@
 #define PUSH_SWAP
 
 #include<stdlib.h>
+#include "libft/libft.h"
+
 
 typedef struct s_node{
 	int value;
@@ -16,15 +18,12 @@ typedef struct s_stack{
 
 //functions for linkedlist creation
 t_node *create_node(int value);
-void stack_init(t_stack *stack);
+t_stack *stack_init();
 void stack_push(t_stack *stack, int value);
 int stack_pop(t_stack *stack);
 void stack_print(t_stack *stack);
 
 
-//i wont be needing this right? as i have the size updated on the structure always...?	
-//int stack_size(t_stack *stack);
-
-
+void ft_puterr(char *str);
 
 #endif
