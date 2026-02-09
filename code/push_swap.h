@@ -22,7 +22,7 @@ t_stack *stack_init();
 void stack_push(t_stack *stack, int value);
 int stack_pop(t_stack *stack);
 void stack_print(t_stack *stack);
-
+void stack_clear(t_stack *stack);
 
 void ft_puterr(char *str);
 

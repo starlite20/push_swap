@@ -83,6 +83,7 @@ int stack_pop(t_stack *stack)
 	stack->size -= 1;
 
 	free(node_to_pop);
+	node_to_pop = NULL;
 	return(value);
 }
 
@@ -103,3 +104,17 @@ void stack_print(t_stack *stack)
 	}
 	ft_printf("\n");
 }
+
+void stack_clear(t_stack **stack)
+{
+	if(!*stack || !(*stack)->head)
+		return ;
+
+	while((*stack)->size > 0)
+	{
+		stack_pop(*stack);
+	}
+	free(*stack);
+	*stack = NULL;
+}
+
