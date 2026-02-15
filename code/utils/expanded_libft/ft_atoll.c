@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 21:04:41 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/15 23:54:50 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/15 23:54:43 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../push_swap.h"
 
 static int	ft_isspace(int c)
 {
@@ -31,20 +31,25 @@ static int	checksign(int c, unsigned long *i)
 	return (1);
 }
 
-int	ft_atoi(const char *str)
-{
-	unsigned long	i;
-	unsigned long	num;
-	int				sign;
 
-	num = 0;
-	i = 0;
-	while (ft_isspace(str[i]) == 1)
-		i++;
-	sign = checksign(str[i], &i);
-	while (ft_isdigit(str[i]))
-	{
-		if ((num > LLONG_MAX / 10) || ((num == LLONG_MAX / 10)
+
+long long ft_atoll(const char *str)
+{
+    long long num = 0;
+    int sign = 1;
+    int i = 0;
+
+    while (ft_isspace(str[i]))
+        i++;
+    if (str[i] == '+' || str[i] == '-')
+    {
+        if (str[i] == '-')
+            sign = -1;
+        i++;
+    }
+    while (str[i] >= '0' && str[i] <= '9')
+    {
+        if ((num > LLONG_MAX / 10) || ((num == LLONG_MAX / 10)
 				&& (str[i] - '0') > LLONG_MAX % 10))
 		{
 			if (sign == 1)
@@ -52,10 +57,9 @@ int	ft_atoi(const char *str)
 			else
 				return (0);
 		}
-		num *= 10;
-		num += (str[i] - '0');
-		i++;
-	}
-	num *= sign;
-	return (num);
+		
+        num = num * 10 + (str[i] - '0');
+        i++;
+    }
+    return (num * sign);
 }

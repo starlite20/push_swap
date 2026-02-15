@@ -16,6 +16,11 @@ typedef struct s_stack{
 	int size;
 } t_stack;
 
+
+//expanded libft
+void ft_puterr_exit(char *str);
+long long ft_atoll(const char *str);
+
 //functions for linkedlist creation
 t_node *create_node(int value);
 t_stack *stack_init();
@@ -24,8 +29,7 @@ void stack_push_back(t_stack *stack, int value);
 int stack_pop(t_stack *stack);
 void stack_print(t_stack *stack);
 void stack_clear(t_stack **stack);
+t_node *stack_find_node(t_stack *stack, int value);
 
-
-void ft_puterr_exit(char *str);
 
 #endif

@@ -1,7 +1,6 @@
 #include "push_swap.h"
 
 
-
 int is_just_number(char *str)
 {
 	int i;
@@ -9,6 +8,8 @@ int is_just_number(char *str)
 	i=0;
 	if((str[i] == '-') || (str[i] == '+'))
 		i++;
+	if (str[i] == '\0')
+    	return (0);
 	while(str[i] != '\0')
 	{
 		if(!ft_isdigit(str[i]))
@@ -20,7 +21,12 @@ int is_just_number(char *str)
 
 void *process_and_store_num(t_stack *numList, char *str)
 {
-		stack_push_back(numList, ft_atoi(str));
+	int num;
+	num = ft_atoll(str);
+	if(!stack_find_node(numList, num))
+		stack_push_back(numList, num);
+	else
+		ft_puterr_exit("Duplicate Values Present in Input\n");
 }
 
 void free_splitted_str(char **splitted_str)
