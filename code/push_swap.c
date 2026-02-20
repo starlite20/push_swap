@@ -81,15 +81,28 @@ int main(int argc, char** argv)
 {
 	int numCount;
 	int *num;
-	t_stack *numList;
+	t_stack *stack_a;
+	t_stack *stack_b;
 	
 	if (argc > 1)
 	{
-		numList = stack_init();
-		validate_and_store(numList, argc, argv);
+		stack_a = stack_init();
+		stack_b = stack_init();
+
+		//input validation and storing
+		validate_and_store(stack_a, argc, argv);
 		ft_printf("\n\n ====================");
-		stack_print(numList);
-		ft_printf("\n====================\n ");
+		stack_print(stack_a);
+		ft_printf("====================\n");
+		
+		ft_printf("\nsorting\n");
+		sort_stack(stack_a, stack_b);
+		ft_printf("====================");
+		stack_print(stack_a);
+		ft_printf("====================\n");
+
+		
+		
 	}
 	else
 	{

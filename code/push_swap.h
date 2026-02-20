@@ -48,5 +48,10 @@ void rra(t_stack *stack_a);
 void rrb(t_stack *stack_b);
 void rrr(t_stack *stack_a, t_stack *stack_b);
 
+//the sorts
+void sort_stack(t_stack *a, t_stack *b);
+void	sort_three(t_stack *numStack);
+void	sort_five(t_stack *a, t_stack *b);
+// void	large_sort(t_stack *numStack);
 
 #endif
