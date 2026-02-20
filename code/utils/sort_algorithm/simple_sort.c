@@ -6,8 +6,8 @@ void sort_stack(t_stack *a, t_stack *b)
         sa(a);
     else if (a->size == 3)
         sort_three(a);
-    // else if (a->size <= 5)
-    //     sort_five(a);
+    else if (a->size <= 5)
+        sort_five(a, b);
     // else
     //     big_sort(a, b);
 }
@@ -57,25 +57,23 @@ void sort_three(t_stack *numStack)
 }
 
 
+
+
 void	sort_five(t_stack *a, t_stack *b)
 {
-	t_node *cur;
 	t_node *min;
 
-	min = a->head;
-	cur = a->head->next;
-	while(cur != a->head)
+	//find 1st smallest
+	while(a->size > 3)
 	{
-		if(cur->value < min->value)
-			min = cur;
-		cur = cur->next;
-	}
+		min = stack_find_min(a);
+		stack_rotate_till_reached(a, min);
+		pb(a,b);
+	}	
 
-	//push min node to b..
-	//find next min in a
-	//push min node to b
-	//sort three for a
-	//pop b
-	//pop b
-	
+	sort_three(a);
+	while(b->size > 0)
+	{	
+		pa(a,b);
+	}	
 }
