@@ -103,10 +103,40 @@ void	sort_five(t_stack *a, t_stack *b)
 
 
 
+t_node *find_spot_in_a(t_stack *a, int value_to_push)
+{
+	t_node *target_spot;
+	t_node *cur;
+	int nodes_traversed;
+
+	if(!a || a->size == 0)
+		return NULL;
+
+	target_spot = NULL;
+	cur = a->head;
+	nodes_traversed = 0;
+	while(nodes_traversed < a->size)
+	{
+		if(cur->value > value_to_push)
+		{
+			if(!target_spot || (target_spot->value > cur->value))
+				target_spot = cur;
+		}
+		cur = cur->next;
+		nodes_traversed++;
+	}
+
+	if(!target_spot)
+		target_spot = stack_find_min(a);
+
+	return(target_spot);
+}
+
 t_node *find_spot_in_b(t_stack *b, int value_to_push)
 {
 	t_node *target_spot;
 	t_node *cur;
+	int nodes_traversed;
 
 	//if b is empty, this is the first value to push.. so no rotation.
 	if(!b || b->size == 0)
@@ -114,8 +144,7 @@ t_node *find_spot_in_b(t_stack *b, int value_to_push)
 
 	target_spot = NULL;
 	cur = b->head;
-
-	int nodes_traversed = 0;
+	nodes_traversed = 0;
 	while(nodes_traversed < b->size)
 	{
 		//go through each element
@@ -126,9 +155,7 @@ t_node *find_spot_in_b(t_stack *b, int value_to_push)
 			// we verify if the value in targetspot is lesser than the current value traversing... 
 			// this would mean that the current value is larger than the target we have, and refers that this current is closer to the value to push... so we update  it.
 			if(!target_spot || (target_spot->value < cur->value))
-			{
 				target_spot = cur;
-			}
 		}
 		cur = cur->next;
 		nodes_traversed++;
@@ -226,16 +253,20 @@ void turk_sort(t_stack *a, t_stack *b)
 	pb(a,b);
 	pb(a,b);
 
-	while(a->size > 0)
+	while(a->size > 3)
 	{
 		node_to_push = find_cheapest_node_in_chunk(a, b);
 		if(node_to_push)
 			rotate_and_move(a,b, node_to_push);
 	}
+	sort_three(a);
 
-	stack_rotate_till_reached(b, 'b', stack_find_max(b));
-
-	while(b->size>0)
+	while(b->size > 0)
+	{
+		stack_rotate_till_reached(a, 'a', find_spot_in_a(a, b->head->value));
 		pa(a,b);
+	}
+
+	stack_rotate_till_reached(a, 'a', stack_find_min(a));
 }
 

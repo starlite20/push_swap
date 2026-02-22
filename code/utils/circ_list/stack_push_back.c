@@ -1,13 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_push_back.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/22 23:55:34 by ssujaude          #+#    #+#             */
+/*   Updated: 2026/02/22 23:55:35 by ssujaude         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../push_swap.h"
 
-void stack_push_back(t_stack *stack, int value)
+void	stack_push_back(t_stack *stack, int value)
 {
-	t_node *tail;
-	t_node *newnode = create_node(value);
-	if(!newnode)
-		return ;
+	t_node	*tail;
+	t_node	*newnode;
 
-	if(stack->head == NULL)
+	newnode = create_node(value);
+	if (!newnode)
+		return ;
+	if (stack->head == NULL)
 	{
 		newnode->next = newnode;
 		newnode->prev = newnode;
@@ -15,12 +28,9 @@ void stack_push_back(t_stack *stack, int value)
 	}
 	else
 	{
-		//old tail
 		tail = stack->head->prev;
-
 		newnode->next = stack->head;
 		newnode->prev = tail;
-
 		tail->next = newnode;
 		stack->head->prev = newnode;
 	}
