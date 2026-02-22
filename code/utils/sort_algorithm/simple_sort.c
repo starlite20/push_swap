@@ -8,8 +8,8 @@ void sort_stack(t_stack *a, t_stack *b)
         sort_three(a);
     else if (a->size <= 5)
         sort_five(a, b);
-    // else
-    //     big_sort(a, b);
+    else
+        turk_sort(a, b);
 }
 
 void sort_three(t_stack *numStack)
@@ -65,7 +65,7 @@ void	sort_five(t_stack *a, t_stack *b)
 	while(a->size > 3)
 	{
 		min = stack_find_min(a);
-		stack_rotate_till_reached(a, min);
+		stack_rotate_till_reached(a, 'a', min);
 		pb(a,b);
 	}	
 
@@ -111,7 +111,7 @@ t_node *find_spot_in_b(t_stack *b, int value_to_push)
 	// if null, it means it found no smaller number, indicating that value is the smallest one.
 	if(!target_spot)
 	{
-		target_spot = stack_find_min(b);
+		target_spot = stack_find_max(b);
 	}
 
 	return(target_spot);
@@ -125,7 +125,12 @@ void pb_in_right_spot(t_stack *a, t_stack *b)
 
 	push_before_this = find_spot_in_b(b, value);
 	if(push_before_this != NULL)
-		stack_rotate_till_reached(b, push_before_this);
+	{
+		stack_rotate_till_reached(b, 'b', push_before_this);
+		// ft_printf("\n\n rotated   B  till reached node to pushbef===================");
+		// stack_print(b);
+		// ft_printf("====STACK B================\n\n");
+	}	
 
 	pb(a,b);
 }
@@ -179,8 +184,15 @@ void turk_sort(t_stack *a, t_stack *b)
 		node_to_push = find_cheapest_node_in_chunk(a, low_val, high_val);
 		if(node_to_push)
 		{
-			stack_rotate_till_reached(a, node_to_push);
+			stack_rotate_till_reached(a, 'a', node_to_push);
+			// ft_printf("\n\n=rotated  A  till reached node to push===================");
+			// stack_print(a);
+			// ft_printf("====================\n\n");
+
 			pb_in_right_spot(a,b);
+			// ft_printf("\n\n=pushed to b===================");
+			// stack_print(b);
+			// ft_printf("====================\n\n");
 		}
 		else
 		{
@@ -189,9 +201,16 @@ void turk_sort(t_stack *a, t_stack *b)
 		}
 	}
 	
+	// ft_printf("\n\n=sorted b desc===================");
+	// stack_print(b);
+	// ft_printf("====================\n\n");
 	while(b->size>0)
 	{
 		pa(a,b);
 	}
+	// ft_printf("\n\n=sorted a===================");
+	// stack_print(a);
+	// ft_printf("====================\n\n");
 
 }
+

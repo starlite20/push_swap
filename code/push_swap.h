@@ -32,8 +32,8 @@ void stack_clear(t_stack **stack);
 t_node *stack_find_node(t_stack *stack, int value);
 int stack_node_distance(t_stack *stack, t_node *node);
 t_node *stack_find_min(t_stack *stack);
-void stack_rotate_till_reached(t_stack *stack, t_node *node_to_be_head);
-
+t_node *stack_find_max(t_stack *stack);
+void stack_rotate_till_reached(t_stack *stack, char stack_id, t_node *node_to_be_head);
 
 //operations
 void sa(t_stack *stack_a);
@@ -55,6 +55,6 @@ void rrr(t_stack *stack_a, t_stack *stack_b);
 void sort_stack(t_stack *a, t_stack *b);
 void	sort_three(t_stack *numStack);
 void	sort_five(t_stack *a, t_stack *b);
-// void	large_sort(t_stack *numStack);
+void	turk_sort(t_stack *a, t_stack *b);
 
 #endif

@@ -12,5 +12,7 @@ int stack_node_distance(t_stack *stack, t_node *node)
 		cur = cur->next;
 		distance += 1;
 	}
+	if(distance > stack->size/2)
+		return(stack->size - distance);
 	return distance;
 }

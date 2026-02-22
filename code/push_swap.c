@@ -91,15 +91,15 @@ int main(int argc, char** argv)
 
 		//input validation and storing
 		validate_and_store(stack_a, argc, argv);
-		ft_printf("\n\n ====================");
-		stack_print(stack_a);
-		ft_printf("====================\n");
+		// ft_printf("\n\n ==start==================");
+		// stack_print(stack_a);
+		// ft_printf("====================\n");
 		
-		ft_printf("\nsorting\n");
+		// ft_printf("\nsorting\n");
 		sort_stack(stack_a, stack_b);
-		ft_printf("====================");
-		stack_print(stack_a);
-		ft_printf("====================\n");
+		// ft_printf("\n\n====================");
+		// stack_print(stack_a);
+		// ft_printf("====================\n\n");
 
 		
 		
