@@ -1,272 +1,70 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simple_sort.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/23 00:57:29 by ssujaude          #+#    #+#             */
+/*   Updated: 2026/02/23 00:58:58 by ssujaude         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../push_swap.h"
 
-
-int is_sorted_stack(t_stack *numList)
+int	update_min_node(t_node *min_cost_node, int *min_cost, t_node *cur, int cost)
 {
-	t_node *cur;
-	int sorted;
-	cur = numList->head->next;
-
-	sorted = 1;
-	while(cur != numList->head)
+	if (!min_cost_node || (min_cost > cost))
 	{
-		if(cur->value < cur->prev->value)
-		{
-			sorted = 0;
-			break;
-		}
-		cur = cur->next;
-	}
-	return (sorted);
-}
-
-
-void sort_stack(t_stack *a, t_stack *b)
-{
-	if(is_sorted_stack(a) == 0)
-	{
-		if (a->size == 2)
-			sa(a);
-		else if (a->size == 3)
-			sort_three(a);
-		else if (a->size <= 5)
-			sort_five(a, b);
-		else
-			turk_sort(a, b);
+		min_cost = cost;
+		min_cost_node = cur;
 	}
 }
 
-void sort_three(t_stack *numStack)
+t_node	*find_cheapest_node(t_stack *a, t_stack *b, int nodes_traversed)
 {
-	int first;
-	int second;
-	int third;
+	t_node	*cur;
+	t_node	*min_cost_node;
+	int		min_cost;
+	int		cost_a;
+	int		cost_b;
 
-	first = numStack->head->value;
-	second = numStack->head->next->value;
-	third = numStack->head->next->next->value;
-
-	if((first<second) && (second<third) && (first<third))
-	{
-		//sorted 1 2 3
-		// do nothing 
-	}
-	else if((first<second) && (second>third) && (first<third))
-	{
-		// 1 3 2
-		sa(numStack);
-		ra(numStack);
-	}
-	else if((first>second) && (second<third) && (first<third))
-	{
-		// 2 1 3
-		sa(numStack);
-	}
-	else if((first<second) && (second>third) && (first>third))
-	{
-		// 2 3 1
-		rra(numStack);
-	}
-	else if((first>second) && (second<third) && (first>third))
-	{
-		// 3 1 2
-		ra(numStack);
-	}
-	else if((first>second) && (second>third) && (first>third))
-	{
-		// 3 2 1
-		ra(numStack);
-		sa(numStack);
-	}
-}
-
-
-void	sort_five(t_stack *a, t_stack *b)
-{
-	t_node *min;
-
-	//find 1st smallest
-	while(a->size > 3)
-	{
-		min = stack_find_min(a);
-		stack_rotate_till_reached(a, 'a', min);
-		pb(a,b);
-	}	
-
-	sort_three(a);
-	while(b->size > 0)
-	{	
-		pa(a,b);
-	}	
-}
-
-
-
-
-t_node *find_spot_in_a(t_stack *a, int value_to_push)
-{
-	t_node *target_spot;
-	t_node *cur;
-	int nodes_traversed;
-
-	if(!a || a->size == 0)
-		return NULL;
-
-	target_spot = NULL;
 	cur = a->head;
-	nodes_traversed = 0;
-	while(nodes_traversed < a->size)
-	{
-		if(cur->value > value_to_push)
-		{
-			if(!target_spot || (target_spot->value > cur->value))
-				target_spot = cur;
-		}
-		cur = cur->next;
-		nodes_traversed++;
-	}
-
-	if(!target_spot)
-		target_spot = stack_find_min(a);
-
-	return(target_spot);
-}
-
-t_node *find_spot_in_b(t_stack *b, int value_to_push)
-{
-	t_node *target_spot;
-	t_node *cur;
-	int nodes_traversed;
-
-	//if b is empty, this is the first value to push.. so no rotation.
-	if(!b || b->size == 0)
-		return NULL;
-
-	target_spot = NULL;
-	cur = b->head;
-	nodes_traversed = 0;
-	while(nodes_traversed < b->size)
-	{
-		//go through each element
-		// if the current value is less than the value to push... it means this is could be a potential node after which the new value to push should appear
-		if(cur->value < value_to_push)
-		{
-			// if targetspot is null, it means its the first value we are checking, so we set to targetspot
-			// we verify if the value in targetspot is lesser than the current value traversing... 
-			// this would mean that the current value is larger than the target we have, and refers that this current is closer to the value to push... so we update  it.
-			if(!target_spot || (target_spot->value < cur->value))
-				target_spot = cur;
-		}
-		cur = cur->next;
-		nodes_traversed++;
-	}
-
-	// if null, it means it found no smaller number, indicating that value is the smallest one.
-	if(!target_spot)
-		target_spot = stack_find_max(b);
-
-	return(target_spot);
-}
-
-void rotate_and_move(t_stack *a, t_stack *b, t_node *node_to_push_from_a)
-{
-	//each push to stack b should be in the right spot... ensuring descending order of num
-	t_node *push_to_b_before_this;
-	int dir_node_a;
-	int dir_node_b;
-
-	push_to_b_before_this = find_spot_in_b(b, node_to_push_from_a->value);
-
-	dir_node_a = stack_node_is_forward(a, node_to_push_from_a);
-	dir_node_b = stack_node_is_forward(b, push_to_b_before_this);
-
-	//if both are forward
-	if((dir_node_a==1) && (dir_node_b==1))
-	{
-		//rr to be done
-		while((a->head != node_to_push_from_a) && (b->head != push_to_b_before_this))
-			rr(a,b);
-	}
-	else if((dir_node_a==-1) && (dir_node_b==-1))
-	{
-		//rrr to be done
-		while((a->head != node_to_push_from_a) && (b->head != push_to_b_before_this))
-			rrr(a,b);
-	}
-
-	stack_rotate_till_reached(a, 'a', node_to_push_from_a);
-	stack_rotate_till_reached(b, 'b', push_to_b_before_this);
-
-	pb(a,b);
-}
-
-t_node *find_cheapest_node_in_chunk(t_stack *a, t_stack *b)
-{
-	t_node *cur;
-	cur = a->head;
-
-	t_node *min_cost_node;
 	min_cost_node = NULL;
-
-	int min_cost;
-	min_cost = INT_MAX;
-
-	int nodes_traversed = 0;
-	int cost_of_node_in_a;
-	int cost_of_node_in_b;
-
-	while(nodes_traversed < a->size)
+	while (nodes_traversed++ < a->size)
 	{
-		cost_of_node_in_a = stack_node_distance(a, cur);
-		cost_of_node_in_b = 0;
-		if(b->size != 0)
-			cost_of_node_in_b = stack_node_distance(b, find_spot_in_b(b,cur->value));
-
-		if(((cost_of_node_in_a < 0) && (cost_of_node_in_b < 0)) || ((cost_of_node_in_a >= 0) && (cost_of_node_in_b >= 0)))
-		{
-			if(min_cost > ft_max(ft_abs(cost_of_node_in_a), ft_abs(cost_of_node_in_b)))
-			{
-				min_cost = ft_max(ft_abs(cost_of_node_in_a), ft_abs(cost_of_node_in_b));
-				min_cost_node = cur;
-			}
-		}
+		cost_a = stack_node_distance(a, cur);
+		cost_b = 0;
+		if (b->size != 0)
+			cost_b = stack_node_distance(b, find_spot_in_b(b, cur->value));
+		if (((cost_a < 0) && (cost_b < 0)) || ((cost_a >= 0) && (cost_b >= 0)))
+			update_min_node(min_cost_node, &min_cost, cur,
+				ft_max(ft_abs(cost_a), ft_abs(cost_b)));
 		else
-		{
-			if(min_cost > (ft_abs(cost_of_node_in_a) + ft_abs(cost_of_node_in_b)))
-			{
-				min_cost = (ft_abs(cost_of_node_in_a) + ft_abs(cost_of_node_in_b));
-				min_cost_node = cur;
-			}
-		}
-
+			update_min_node(min_cost_node, &min_cost, cur, (ft_abs(cost_a)
+					+ ft_abs(cost_b)));
 		cur = cur->next;
-		nodes_traversed++;
 	}
-
-	return(min_cost_node);
+	return (min_cost_node);
 }
 
-void turk_sort(t_stack *a, t_stack *b)
+void	turk_sort(t_stack *a, t_stack *b)
 {
-	t_node *node_to_push;
+	t_node	*node_to_push;
 
-	pb(a,b);
-	pb(a,b);
-
-	while(a->size > 3)
+	pb(a, b);
+	pb(a, b);
+	while (a->size > 3)
 	{
-		node_to_push = find_cheapest_node_in_chunk(a, b);
-		if(node_to_push)
-			rotate_and_move(a,b, node_to_push);
+		node_to_push = find_cheapest_node(a, b, 0);
+		if (node_to_push)
+			rotate_and_move(a, b, node_to_push);
 	}
 	sort_three(a);
-
-	while(b->size > 0)
+	while (b->size > 0)
 	{
 		stack_rotate_till_reached(a, 'a', find_spot_in_a(a, b->head->value));
-		pa(a,b);
+		pa(a, b);
 	}
-
 	stack_rotate_till_reached(a, 'a', stack_find_min(a));
 }
-

@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   sort_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/23 01:01:01 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/23 01:06:02 by ssujaude         ###   ########.fr       */
+/*   Created: 2026/02/23 00:19:48 by ssujaude          #+#    #+#             */
+/*   Updated: 2026/02/23 00:21:54 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../push_swap.h"
 
-int	main(int argc, char **argv)
+void	sort_stack(t_stack *a, t_stack *b)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
-
-	if (argc > 1)
+	if (is_sorted_stack(a) == 0)
 	{
-		stack_a = stack_init();
-		stack_b = stack_init();
-		validate_and_store(stack_a, argc, argv);
-		sort_stack(stack_a, stack_b);
+		if (a->size == 2)
+			sa(a);
+		else if (a->size == 3)
+			sort_three(a);
+		else if (a->size <= 5)
+			sort_five(a, b);
+		else
+			turk_sort(a, b);
 	}
-	else
-	{
-		ft_puterr_exit();
-	}
-	return (0);
 }

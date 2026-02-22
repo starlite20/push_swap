@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_is_just_number.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/23 01:01:01 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/23 01:06:02 by ssujaude         ###   ########.fr       */
+/*   Created: 2026/02/23 01:00:27 by ssujaude          #+#    #+#             */
+/*   Updated: 2026/02/23 01:01:16 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+int	ft_is_just_number(char *str)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+	int	i;
 
-	if (argc > 1)
+	i = 0;
+	if ((str[i] == '-') || (str[i] == '+'))
+		i++;
+	if (str[i] == '\0')
+		return (0);
+	while (str[i] != '\0')
 	{
-		stack_a = stack_init();
-		stack_b = stack_init();
-		validate_and_store(stack_a, argc, argv);
-		sort_stack(stack_a, stack_b);
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
 	}
-	else
-	{
-		ft_puterr_exit();
-	}
-	return (0);
+	return (1);
 }

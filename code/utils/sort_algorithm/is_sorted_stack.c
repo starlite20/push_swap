@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   is_sorted_stack.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/23 01:01:01 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/23 01:06:02 by ssujaude         ###   ########.fr       */
+/*   Created: 2026/02/23 00:17:58 by ssujaude          #+#    #+#             */
+/*   Updated: 2026/02/23 00:18:20 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../push_swap.h"
 
-int	main(int argc, char **argv)
+int	is_sorted_stack(t_stack *numList)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+	t_node	*cur;
+	int		sorted;
 
-	if (argc > 1)
+	cur = numList->head->next;
+	sorted = 1;
+	while (cur != numList->head)
 	{
-		stack_a = stack_init();
-		stack_b = stack_init();
-		validate_and_store(stack_a, argc, argv);
-		sort_stack(stack_a, stack_b);
+		if (cur->value < cur->prev->value)
+		{
+			sorted = 0;
+			break ;
+		}
+		cur = cur->next;
 	}
-	else
-	{
-		ft_puterr_exit();
-	}
-	return (0);
+	return (sorted);
 }
