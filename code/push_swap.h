@@ -20,8 +20,12 @@ typedef struct s_stack{
 //expanded libft
 void ft_puterr_exit(char *str);
 long long ft_atoll(const char *str);
+int ft_min(int a, int b);
+int ft_max(int a, int b);
+int ft_abs(int num);
 
-//functions for linkedlist
+
+//functions for circular doubly linkedlist
 t_node *create_node(int value);
 t_stack *stack_init();
 void stack_push(t_stack *stack, int value);
@@ -34,6 +38,7 @@ int stack_node_distance(t_stack *stack, t_node *node);
 t_node *stack_find_min(t_stack *stack);
 t_node *stack_find_max(t_stack *stack);
 void stack_rotate_till_reached(t_stack *stack, char stack_id, t_node *node_to_be_head);
+int stack_node_is_forward(t_stack *stack, t_node *node);
 
 //operations
 void sa(t_stack *stack_a);
