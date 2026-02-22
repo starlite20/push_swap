@@ -6,7 +6,7 @@
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 21:04:41 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/15 23:54:43 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/23 00:06:06 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,35 +31,40 @@ static int	checksign(int c, unsigned long *i)
 	return (1);
 }
 
-
-
-long long ft_atoll(const char *str)
+static int	skip_isspace(char *str)
 {
-    long long num = 0;
-    int sign = 1;
-    int i = 0;
+	int	i;
 
-    while (ft_isspace(str[i]))
-        i++;
-    if (str[i] == '+' || str[i] == '-')
-    {
-        if (str[i] == '-')
-            sign = -1;
-        i++;
-    }
-    while (str[i] >= '0' && str[i] <= '9')
-    {
-        if ((num > LLONG_MAX / 10) || ((num == LLONG_MAX / 10)
-				&& (str[i] - '0') > LLONG_MAX % 10))
+	i = 0;
+	while (ft_isspace(str[i]))
+		(i)++;
+	return (i);
+}
+
+long long	ft_atoll(const char *str)
+{
+	long long	num;
+	int			sign;
+	int			i;
+
+	num = 0;
+	sign = 1;
+	i = skip_isspace(str);
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i++] == '-')
+			sign = -1;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		if ((num > LLONG_MAX / 10) || ((num == LLONG_MAX / 10) && (str[i]
+					- '0') > LLONG_MAX % 10))
 		{
 			if (sign == 1)
 				return (-1);
-			else
-				return (0);
+			return (0);
 		}
-		
-        num = num * 10 + (str[i] - '0');
-        i++;
-    }
-    return (num * sign);
+		num = num * 10 + (str[i++] - '0');
+	}
+	return (num * sign);
 }

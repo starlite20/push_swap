@@ -1,10 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_puterr_exit.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/23 00:01:10 by ssujaude          #+#    #+#             */
+/*   Updated: 2026/02/23 00:07:10 by ssujaude         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../push_swap.h"
 
-void ft_puterr_exit(char *str)
+void	ft_puterr_exit(void)
 {
-	// ft_putstr_fd("Error: ", 2);
-	// ft_putstr_fd(str, 2);
-	// ft_putstr_fd("\n", 2);
 	ft_putstr_fd("Error\n", 2);
 	exit(0);
 }
