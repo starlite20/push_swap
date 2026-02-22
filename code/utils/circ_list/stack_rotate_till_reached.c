@@ -4,6 +4,9 @@ void stack_rotate_till_reached(t_stack *stack, char stack_id, t_node *node_to_be
 {
 	int node_distance = stack_node_distance(stack,node_to_be_head);
 
+	if(!stack || stack->size == 0 || !node_to_be_head)
+		return;
+
 	while(stack->head != node_to_be_head)
 	{
 		if(stack_node_is_forward(stack, node_to_be_head) == 1)

@@ -96,9 +96,9 @@ int main(int argc, char** argv)
 		
 		// ft_printf("\nsorting\n");
 		sort_stack(stack_a, stack_b);
-		ft_printf("\n\n====================");
-		stack_print(stack_a);
-		ft_printf("====================\n\n");
+		// ft_printf("\n\n====================");
+		// stack_print(stack_a);
+		// ft_printf("====================\n\n");
 
 		
 		

@@ -136,9 +136,7 @@ t_node *find_spot_in_b(t_stack *b, int value_to_push)
 
 	// if null, it means it found no smaller number, indicating that value is the smallest one.
 	if(!target_spot)
-	{
 		target_spot = stack_find_max(b);
-	}
 
 	return(target_spot);
 }
@@ -147,18 +145,22 @@ void rotate_and_move(t_stack *a, t_stack *b, t_node *node_to_push_from_a)
 {
 	//each push to stack b should be in the right spot... ensuring descending order of num
 	t_node *push_to_b_before_this;
+	int dir_node_a;
+	int dir_node_b;
 
 	push_to_b_before_this = find_spot_in_b(b, node_to_push_from_a->value);
 
+	dir_node_a = stack_node_is_forward(a, node_to_push_from_a);
+	dir_node_b = stack_node_is_forward(b, push_to_b_before_this);
 
 	//if both are forward
-	if((stack_node_is_forward(a, node_to_push_from_a)==1) && (stack_node_is_forward(b, push_to_b_before_this)==1))
+	if((dir_node_a==1) && (dir_node_b==1))
 	{
 		//rr to be done
 		while((a->head != node_to_push_from_a) && (b->head != push_to_b_before_this))
 			rr(a,b);
 	}
-	else if((stack_node_is_forward(a, node_to_push_from_a)==-1) && (stack_node_is_forward(b, push_to_b_before_this)==-1))
+	else if((dir_node_a==-1) && (dir_node_b==-1))
 	{
 		//rrr to be done
 		while((a->head != node_to_push_from_a) && (b->head != push_to_b_before_this))
@@ -166,19 +168,12 @@ void rotate_and_move(t_stack *a, t_stack *b, t_node *node_to_push_from_a)
 	}
 
 	stack_rotate_till_reached(a, 'a', node_to_push_from_a);
-
-	if(push_to_b_before_this != NULL)
-	{
-		stack_rotate_till_reached(b, 'b', push_to_b_before_this);
-		// ft_printf("\n\n rotated   B  till reached node to pushbef===================");
-		// stack_print(b);
-		// ft_printf("====STACK B================\n\n");
-	}	
+	stack_rotate_till_reached(b, 'b', push_to_b_before_this);
 
 	pb(a,b);
 }
 
-t_node *find_cheapest_node_in_chunk(t_stack *a, t_stack *b, int low_val, int high_val)
+t_node *find_cheapest_node_in_chunk(t_stack *a, t_stack *b)
 {
 	t_node *cur;
 	cur = a->head;
@@ -195,30 +190,28 @@ t_node *find_cheapest_node_in_chunk(t_stack *a, t_stack *b, int low_val, int hig
 
 	while(nodes_traversed < a->size)
 	{
-		if((cur->value >= low_val) && (cur->value <= high_val))
-		{
-			cost_of_node_in_a = stack_node_distance(a, cur);
-			cost_of_node_in_b = 0;
-			if(b->size != 0)
-				cost_of_node_in_b = stack_node_distance(b, find_spot_in_b(b,cur->value));
+		cost_of_node_in_a = stack_node_distance(a, cur);
+		cost_of_node_in_b = 0;
+		if(b->size != 0)
+			cost_of_node_in_b = stack_node_distance(b, find_spot_in_b(b,cur->value));
 
-			if(((cost_of_node_in_a < 0) && (cost_of_node_in_b < 0)) || ((cost_of_node_in_a >= 0) && (cost_of_node_in_b >= 0)))
+		if(((cost_of_node_in_a < 0) && (cost_of_node_in_b < 0)) || ((cost_of_node_in_a >= 0) && (cost_of_node_in_b >= 0)))
+		{
+			if(min_cost > ft_max(ft_abs(cost_of_node_in_a), ft_abs(cost_of_node_in_b)))
 			{
-				if(min_cost > ft_max(ft_abs(cost_of_node_in_a), ft_abs(cost_of_node_in_b)))
-				{
-					min_cost = ft_max(ft_abs(cost_of_node_in_a), ft_abs(cost_of_node_in_b));
-					min_cost_node = cur;
-				}
-			}
-			else
-			{
-				if(min_cost > (ft_abs(cost_of_node_in_a) + ft_abs(cost_of_node_in_b)))
-				{
-					min_cost = (ft_abs(cost_of_node_in_a) + ft_abs(cost_of_node_in_b));
-					min_cost_node = cur;
-				}
+				min_cost = ft_max(ft_abs(cost_of_node_in_a), ft_abs(cost_of_node_in_b));
+				min_cost_node = cur;
 			}
 		}
+		else
+		{
+			if(min_cost > (ft_abs(cost_of_node_in_a) + ft_abs(cost_of_node_in_b)))
+			{
+				min_cost = (ft_abs(cost_of_node_in_a) + ft_abs(cost_of_node_in_b));
+				min_cost_node = cur;
+			}
+		}
+
 		cur = cur->next;
 		nodes_traversed++;
 	}
@@ -228,46 +221,21 @@ t_node *find_cheapest_node_in_chunk(t_stack *a, t_stack *b, int low_val, int hig
 
 void turk_sort(t_stack *a, t_stack *b)
 {
-	int chunk_size = 20;
-	int low_val;
-	int high_val;
-
-	low_val = stack_find_min(a)->value;
-	high_val = low_val + chunk_size;
-
 	t_node *node_to_push;
+
+	pb(a,b);
+	pb(a,b);
 
 	while(a->size > 0)
 	{
-		node_to_push = find_cheapest_node_in_chunk(a, b, low_val, high_val);
+		node_to_push = find_cheapest_node_in_chunk(a, b);
 		if(node_to_push)
-		{
 			rotate_and_move(a,b, node_to_push);
-			// ft_printf("\n\n=pushed to b===================");
-			// stack_print(b);
-			// ft_printf("====================\n\n");
-		}
-		else
-		{
-			// low_val = high_val + 1;
-			low_val = stack_find_min(a)->value;
-			high_val = low_val + chunk_size;
-		}
 	}
-	
-	// ft_printf("\n\n=sorted b desc===================");
-	// stack_print(b);
-	// ft_printf("====================\n\n");
 
 	stack_rotate_till_reached(b, 'b', stack_find_max(b));
 
 	while(b->size>0)
-	{
 		pa(a,b);
-	}
-	// ft_printf("\n\n=sorted a===================");
-	// stack_print(a);
-	// ft_printf("====================\n\n");
-
 }
 
