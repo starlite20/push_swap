@@ -6,7 +6,7 @@
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 01:01:38 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/23 01:04:18 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/23 01:20:12 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_node				*stack_find_max(t_stack *stack);
 void				stack_rotate_till_reached(t_stack *stack, char stack_id,
 						t_node *node_to_be_head);
 int					stack_node_is_forward(t_stack *stack, t_node *node);
+int					is_sorted_stack(t_stack *numList);
 
 void				sa(t_stack *stack_a);
 void				sb(t_stack *stack_b);
@@ -79,7 +80,7 @@ t_node				*find_spot_in_a(t_stack *a, int value_to_push);
 t_node				*find_spot_in_b(t_stack *b, int value_to_push);
 void				rotate_and_move(t_stack *a, t_stack *b,
 						t_node *node_to_push_from_a);
-int					update_min_node(t_node *min_cost_node, int *min_cost,
+void				update_min_node(t_node **min_cost_node, int *min_cost,
 						t_node *cur, int cost);
 t_node				*find_cheapest_node(t_stack *a, t_stack *b,
 						int nodes_traversed);

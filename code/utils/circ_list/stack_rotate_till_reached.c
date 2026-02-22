@@ -6,7 +6,7 @@
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 23:55:18 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/23 00:48:15 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/23 01:10:32 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 void	stack_rotate_till_reached(t_stack *stack, char stack_id,
 		t_node *node_to_be_head)
 {
-	int	node_distance;
-
-	node_distance = stack_node_distance(stack, node_to_be_head);
 	if (!stack || stack->size == 0 || !node_to_be_head)
 		return ;
 	while (stack->head != node_to_be_head)

@@ -6,11 +6,11 @@
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 01:00:27 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/23 01:01:16 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/23 01:08:32 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../push_swap.h"
 
 int	ft_is_just_number(char *str)
 {

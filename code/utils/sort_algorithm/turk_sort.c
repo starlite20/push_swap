@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   simple_sort.c                                      :+:      :+:    :+:   */
+/*   turk_sort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 00:57:29 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/23 00:58:58 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/23 01:22:02 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-int	update_min_node(t_node *min_cost_node, int *min_cost, t_node *cur, int cost)
+void	update_min_node(t_node **min_cost_node, int *min_cost, t_node *cur,
+		int cost)
 {
-	if (!min_cost_node || (min_cost > cost))
+	if (*min_cost_node == NULL || (*min_cost > cost))
 	{
-		min_cost = cost;
-		min_cost_node = cur;
+		*min_cost = cost;
+		*min_cost_node = cur;
 	}
 }
 
@@ -31,6 +32,7 @@ t_node	*find_cheapest_node(t_stack *a, t_stack *b, int nodes_traversed)
 
 	cur = a->head;
 	min_cost_node = NULL;
+	min_cost = INT_MAX;
 	while (nodes_traversed++ < a->size)
 	{
 		cost_a = stack_node_distance(a, cur);
@@ -38,10 +40,10 @@ t_node	*find_cheapest_node(t_stack *a, t_stack *b, int nodes_traversed)
 		if (b->size != 0)
 			cost_b = stack_node_distance(b, find_spot_in_b(b, cur->value));
 		if (((cost_a < 0) && (cost_b < 0)) || ((cost_a >= 0) && (cost_b >= 0)))
-			update_min_node(min_cost_node, &min_cost, cur,
+			update_min_node(&min_cost_node, &min_cost, cur,
 				ft_max(ft_abs(cost_a), ft_abs(cost_b)));
 		else
-			update_min_node(min_cost_node, &min_cost, cur, (ft_abs(cost_a)
+			update_min_node(&min_cost_node, &min_cost, cur, (ft_abs(cost_a)
 					+ ft_abs(cost_b)));
 		cur = cur->next;
 	}

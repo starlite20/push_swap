@@ -6,7 +6,7 @@
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 21:04:41 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/23 00:06:06 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/23 01:14:57 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	checksign(int c, unsigned long *i)
 	return (1);
 }
 
-static int	skip_isspace(char *str)
+static int	skip_isspace(const char *str)
 {
 	int	i;
 
@@ -43,18 +43,14 @@ static int	skip_isspace(char *str)
 
 long long	ft_atoll(const char *str)
 {
-	long long	num;
-	int			sign;
-	int			i;
+	long long		num;
+	int				sign;
+	unsigned long	i;
 
 	num = 0;
 	sign = 1;
 	i = skip_isspace(str);
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i++] == '-')
-			sign = -1;
-	}
+	sign = checksign(str[i], &i);
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		if ((num > LLONG_MAX / 10) || ((num == LLONG_MAX / 10) && (str[i]

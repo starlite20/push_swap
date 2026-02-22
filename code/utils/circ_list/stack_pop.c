@@ -6,7 +6,7 @@
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 23:55:45 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/22 23:55:47 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/23 01:08:12 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	stack_pop(t_stack *stack)
 	node_to_pop = stack->head;
 	if (!node_to_pop)
 	{
-		ft_puterr_exit("Error: Attempting to Pop an Empty Stack");
+		ft_puterr_exit();
 	}
 	value = node_to_pop->value;
 	if (stack->size == 1)
