@@ -6,7 +6,7 @@
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 01:01:38 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/23 01:20:12 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/24 00:39:49 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ int					ft_max(int a, int b);
 int					ft_abs(int num);
 int					ft_is_just_number(char *str);
 
-void				validate_and_store(t_stack *numList, int count,
-						char **input);
+int	validate_and_store(t_stack *numList, int count, char **input);
 void				free_splitted_str(char **splitted_str);
-void				process_and_store_num(t_stack *numList, char *str);
+int				process_and_store_num(t_stack *numList, char *str);
+void	error_exit(t_stack *stack_a, t_stack *stack_b);
 
 t_node				*create_node(int value);
 t_stack				*stack_init(void);
