@@ -6,7 +6,7 @@
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 01:01:01 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/24 00:39:55 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/25 23:29:13 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ int	main(int argc, char **argv)
 	{
 		stack_a = stack_init();
 		stack_b = stack_init();
-		if(validate_and_store(stack_a, argc, argv) != 1)
+		if (!stack_a || !stack_b)
+			error_exit(stack_a, stack_b);
+		if (validate_and_store(stack_a, argc, argv) != 1)
 			error_exit(stack_a, stack_b);
 		sort_stack(stack_a, stack_b);
-
 		stack_clear(&stack_a);
 		stack_clear(&stack_b);
 	}

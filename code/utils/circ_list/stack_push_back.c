@@ -6,20 +6,20 @@
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 23:55:34 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/22 23:55:35 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/24 01:00:47 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-void	stack_push_back(t_stack *stack, int value)
+int	stack_push_back(t_stack *stack, int value)
 {
 	t_node	*tail;
 	t_node	*newnode;
 
 	newnode = create_node(value);
 	if (!newnode)
-		return ;
+		return (0);
 	if (stack->head == NULL)
 	{
 		newnode->next = newnode;
@@ -35,4 +35,5 @@ void	stack_push_back(t_stack *stack, int value)
 		stack->head->prev = newnode;
 	}
 	stack->size += 1;
+	return (1);
 }
