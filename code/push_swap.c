@@ -6,7 +6,7 @@
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 01:01:01 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/25 23:29:13 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/27 00:08:21 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 
 	stack_a = NULL;
 	stack_b = NULL;
-	if (argc > 1)
+	if (argc > 2)
 	{
 		stack_a = stack_init();
 		stack_b = stack_init();

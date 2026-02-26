@@ -6,7 +6,7 @@
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 15:17:45 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/26 17:58:26 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/27 01:08:05 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	*find_and_extract_line(char *old_stashed_data, char **full_line,
 			*full_line = NULL;
 			return (NULL);
 		}
-		terminator_point = ft_strchr(old_stashed_data, '\n');
+		terminator_point = ft_strchr_strict(old_stashed_data, '\n');
 		if (!terminator_point)
 			return (separate_line_from_stash(old_stashed_data, full_line,
 					terminator_point, old_stash_len));
@@ -95,7 +95,7 @@ char	*get_next_line(int fd)
 	temp_reader = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!temp_reader)
 		return (NULL);
-	while (!ft_strchr(stashed_data[fd], '\n'))
+	while (!ft_strchr_strict(stashed_data[fd], '\n'))
 	{
 		bytes_read = read(fd, temp_reader, BUFFER_SIZE);
 		if (bytes_read <= 0)
