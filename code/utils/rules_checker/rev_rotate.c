@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   rev_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/23 00:07:42 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/26 18:13:00 by ssujaude         ###   ########.fr       */
+/*   Created: 2026/02/23 00:07:57 by ssujaude          #+#    #+#             */
+/*   Updated: 2026/02/26 18:12:17 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-static void	push(t_stack *to, t_stack *from, char *to_print)
+static void	reverse_rotate_silent(t_stack *stack)
 {
-	int	popped_val;
-
-	if (!from || !to || from->size == 0)
+	if (!stack || stack->size < 2)
 		return ;
-	popped_val = stack_pop(from);
-	stack_push(to, popped_val);
-	ft_putstr_fd(to_print, 1);
+	stack->head = stack->head->prev;
 }
 
-void	pa(t_stack *stack_a, t_stack *stack_b)
+void	rra_silent(t_stack *stack_a)
 {
-	push(stack_a, stack_b, "pa\n");
+	reverse_rotate_silent(stack_a);
 }
 
-void	pb(t_stack *stack_a, t_stack *stack_b)
+void	rrb_silent(t_stack *stack_b)
 {
-	push(stack_b, stack_a, "pb\n");
+	reverse_rotate_silent(stack_b);
+}
+
+void	rrr_silent(t_stack *stack_a, t_stack *stack_b)
+{
+	reverse_rotate_silent(stack_a);
+	reverse_rotate_silent(stack_b);
 }

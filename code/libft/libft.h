@@ -6,12 +6,18 @@
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 21:05:26 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/05 21:28:26 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/26 17:57:53 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+# define MAX_FILES 10000
 
 # include <limits.h>
 # include <stdarg.h>
@@ -128,5 +134,10 @@ int					print_hexaddr_flags(t_flags *flags,
 						unsigned long long addr);
 void				ft_put_hexaddress(unsigned long long to_print, int *printed,
 						t_flags *flags);
+
+char				*get_next_line(int fd);
+char				*ft_str_join_and_free(char *s1, char *s2);
+char				*ft_strdup_len(const char *s, int copy_len);
+char				*ft_strchr_strict(const char *s, int c);
 
 #endif

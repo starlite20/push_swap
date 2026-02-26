@@ -6,7 +6,7 @@
 #    By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/14 20:59:35 by ssujaude          #+#    #+#              #
-#    Updated: 2026/02/05 21:14:21 by ssujaude         ###   ########.fr        #
+#    Updated: 2026/02/26 17:50:45 by ssujaude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,22 +33,26 @@ BONUS = \
 
 PRINTF = \
 	ft_printf.c ft_flag_mgr.c ft_print_num.c ft_print_num_utils.c \
-	ft_print_hex.c ft_print_unum.c ft_print_addr.c ft_print_chars.c ft_print_strs.c 
+	ft_print_hex.c ft_print_unum.c ft_print_addr.c ft_print_chars.c ft_print_strs.c
+
+GET_NEXT_LINE = \
+	get_next_line_bonus.c get_next_line_utils_bonus.c
 
 OBJS = ${SRCS:.c=.o}
 BONUS_OBJS = ${BONUS:.c=.o}
 PRINTF_OBJS = ${PRINTF:.c=.o}
+GET_NEXT_LINE_OBJS = ${GET_NEXT_LINE:.c=.o}
 
 all: $(NAME)
 
 .o: .c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): ${OBJS} ${BONUS_OBJS} ${PRINTF_OBJS}
-	$(AR) ${NAME} $(OBJS) ${BONUS_OBJS} ${PRINTF_OBJS}
+$(NAME): ${OBJS} ${BONUS_OBJS} ${PRINTF_OBJS} ${GET_NEXT_LINE_OBJS}
+	$(AR) ${NAME} $(OBJS) ${BONUS_OBJS} ${PRINTF_OBJS} ${GET_NEXT_LINE_OBJS}
 
 clean:
-	${RM} ${OBJS} ${BONUS_OBJS} ${PRINTF_OBJS}
+	${RM} ${OBJS} ${BONUS_OBJS} ${PRINTF_OBJS} ${GET_NEXT_LINE_OBJS}
 
 fclean: clean
 	$(RM) $(NAME)

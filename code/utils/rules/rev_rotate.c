@@ -6,13 +6,13 @@
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 00:07:57 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/23 00:08:56 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/26 18:12:56 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-void	reverse_rotate(t_stack *stack, char *to_print)
+static void	reverse_rotate(t_stack *stack, char *to_print)
 {
 	if (!stack || stack->size < 2)
 		return ;

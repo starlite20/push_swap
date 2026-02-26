@@ -6,7 +6,7 @@
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 01:01:38 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/25 23:30:40 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/26 18:13:12 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,21 @@ void				rr(t_stack *stack_a, t_stack *stack_b);
 void				rra(t_stack *stack_a);
 void				rrb(t_stack *stack_b);
 void				rrr(t_stack *stack_a, t_stack *stack_b);
+
+void				sa_silent(t_stack *stack_a);
+void				sb_silent(t_stack *stack_b);
+void				ss_silent(t_stack *stack_a, t_stack *stack_b);
+
+void				pa_silent(t_stack *stack_a, t_stack *stack_b);
+void				pb_silent(t_stack *stack_a, t_stack *stack_b);
+
+void				ra_silent(t_stack *stack_a);
+void				rb_silent(t_stack *stack_b);
+void				rr_silent(t_stack *stack_a, t_stack *stack_b);
+
+void				rra_silent(t_stack *stack_a);
+void				rrb_silent(t_stack *stack_b);
+void				rrr_silent(t_stack *stack_a, t_stack *stack_b);
 
 void				sort_stack(t_stack *a, t_stack *b);
 void				sort_three(t_stack *numStack);
