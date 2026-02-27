@@ -32,8 +32,6 @@ This project has a dual approach manner to identify the most effient way to sort
 ---
 
 
-## Technical Implementation
-
 ### Data Structures
 
 Implemented a **Circular Doubly Linked List** to represent each stack because it allows ease of access to both head and tail, and makes all rotational operations extremely efficient.
@@ -177,87 +175,79 @@ typedef struct s_stack {
 
 
 ---
-
+---
 
 
 ## Instructions
 
-### Compilation
+### Compilation & Execution
 
-#### Step 1: Build the libft library
-
+#### Build the runtime file
 ```bash
-# Navigate to the libft directory
-cd libft
-
-# Build the library
-make
-
-# Return to root
-cd ..
+make all && make clean
 ```
 
-#### Step 2: Build push_swap
+#### Running Push_Swap
 
-```bash
-# Compile the project
-make
-```
-
-**Why:** The Makefile compiles all source files from the various utility directories, links them with the libft static library, and produces the `push_swap` executable.
-
----
-
-### Execution
-
-#### Run with individual arguments
-
+- Push_Swap can be run using the following sample command.
 ```bash
 ./push_swap 5 3 8 1 9
 ```
+- Where the runtime file is called, followed by arguments to be passed for the stack
+- The output will be the operations to be applied to achieve a sorted stack.
+- If there is any error occuring, the output will be "Error" and nothing else.
 
-#### Run with space-separated arguments
 
-```bash
-./push_swap "5 3 8 1 9"
-```
-
-#### Verify with the checker
+#### Running with the Checker
 
 ```bash
-./push_swap 5 3 8 1 9 | ./checker_OS 5 3 8 1 9
+./push_swap 5 3 8 1 9 | ./checker 5 3 8 1 9
 ```
 
-**Success Criteria:**
-- Checker outputs: `OK` (stack is sorted)
-- Checker outputs: `KO` (stack is NOT sorted)
-- Checker outputs: `Error` (invalid input)
+- The Checker outputs `OK` if the stack is sorted, `KO` if the stack is NOT sorted, and `Error` for invalid input.
 
 ---
 
-## Testing & Verification
+#### Test with random numbers
 
-### Test with random numbers
+- As we must test with large set of random numbers, here are the snippets to run them as well.
 
-```bash
-# Generate random numbers and test
-ARG=$(seq 1 100 | sort -R | head -n 5 | tr '\n' ' ')
-./push_swap $ARG | ./checker_OS $ARG
-```
+  - 100 Numbers
+    ```bash
+    ARG=$(seq 1 100 | sort -R | head -n 5 | tr '\n' ' ')
+    ./push_swap $ARG | ./checker $ARG
+    ```
 
-### Count the number of operations
+  - 500 Numbers
+    ```bash
+    ARG=$(seq 1 500 | sort -R | head -n 5 | tr '\n' ' ')
+    ./push_swap $ARG | ./checker $ARG
+    ```
+  
+  - Inorder to count the moves presented by the program, we pipe it to `wc -l`
 
-```bash
-# Count moves for 100 random numbers
-ARG=$(seq 1 100 | sort -R | head -n 100 | tr '\n' ' ')
-./push_swap $ARG | wc -l
-```
+#### Tested Performance rating
 
-**Expected Performance:**
-- 3 numbers: ≤ 3 moves
-- 5 numbers: ≤ 12 moves
-- 100 numbers: ~700 moves (max ~1500)
-- 500 numbers: ~5500 moves (max ~11500)
+- This code consistently produces the following results :
+  - 3 numbers sorted under **3** moves
+  - 5 numbers sorted under **12** moves
+  - 100 numbers sorted under **700** moves
+  - 500 numbers sorted under **5500** moves
+
+
+---
+
+## Resources
+
+### Documentation
+
+- [Push Swap Project Explained](https://42-cursus.gitbook.io/guide/2-rank-02/push_swap)
+- [Turk Algorithm Explanation](https://pure-forest.medium.com/push-swap-turk-algorithm-explained-in-6-steps-4c6650a458c0) - Visual & detailed breakdown of the algorithm
+- AI was utilized to generate edge cases and testing the code thoroughly.
+
+---
+
+
 
 ### Edge Cases to Test
 
@@ -281,48 +271,3 @@ ARG=$(seq 1 100 | sort -R | head -n 100 | tr '\n' ' ')
 ./push_swap
 ```
 
-
-## Resources
-
-### Documentation
-
-- [Turk Algorithm Explanation](https://medium.com/@ayogun/push-swap-c1f10d4f4222) - Good breakdown of the algorithm
-- [Push Swap Tutorial](https://www.youtube.com/watch?v=wRpg2iuRLSs) - Visual explanation
-
-### Algorithm References
-
-- [Doubly Linked List](https://en.wikipedia.org/wiki/Doubly_linked_list) - Data structure used
-- [Circular Buffer](https://en.wikipedia.org/wiki/Circular_buffer) - Concept behind circular list
-- [Sorting Algorithms](https://en.wikipedia.org/wiki/Sorting_algorithm) - General sorting concepts
-
-### AI Usage
-
-AI was used during development for:
-- Code review and optimization suggestions
-- Debugging complex pointer manipulation issues
-- Explaining the Turk algorithm concept
-- Generating test cases and edge case scenarios
-
-The core algorithm implementation and data structure design were written manually based on understanding of the Turk sort approach.
-
----
-
-## Why This Implementation?
-
-**Circular doubly linked list** was chosen because:
-- O(1) rotation (just move head pointer)
-- O(1) access to both ends
-- No need to traverse for tail operations
-- Natural fit for the rotate/reverse-rotate operations
-
-**Turk algorithm** was chosen because:
-- Efficient for larger datasets (100-500 elements)
-- Minimizes total moves by calculating costs
-- Uses simultaneous rotations when possible (rr/rrr)
-- Well-established solution for this project
-
-**Input validation** includes:
-- Integer overflow checking (uses long long for parsing)
-- Duplicate detection
-- Non-numeric character detection
-- Empty argument handling
