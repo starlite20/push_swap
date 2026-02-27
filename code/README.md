@@ -1,4 +1,6 @@
-***This project has been created as part of the 42 curriculum by ssujaude.***
+_This project has been created as part of the 42 curriculum by ssujaude_
+
+# Push Swap
 
 ## Description
 
