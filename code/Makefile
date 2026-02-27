@@ -6,20 +6,18 @@
 #    By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/19 19:14:16 by ssujaude          #+#    #+#              #
-#    Updated: 2026/02/27 02:32:42 by ssujaude         ###   ########.fr        #
+#    Updated: 2026/02/27 03:00:48 by ssujaude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-NAME = push_swap.a
-BONUS_NAME = checker.a
+NAME = push_swap
+BONUS_NAME = checker
 
 MAKE = make -C
 RM = rm -f
-
-AR = ar rcs
 
 
 EXPANDED_LIBFT = \
@@ -34,7 +32,7 @@ CIRC_LIST = \
 	utils/circ_list/stack_rotate_till_reached.c
 
 RULES = \
-	utils/rules/push.c utils/rules/rev_rotate.c utils/rules/rotate.c utils/rules/swap.c 
+	utils/rules/push.c utils/rules/rev_rotate.c utils/rules/rotate.c utils/rules/swap.c \
 	utils/rules_checker/push.c utils/rules_checker/rev_rotate.c utils/rules_checker/rotate.c utils/rules_checker/swap.c
 
 SORT_ALGORITHM = \
@@ -44,38 +42,36 @@ SORT_ALGORITHM = \
 UTILS = utils/input_validator.c \
 	$(EXPANDED_LIBFT) $(CIRC_LIST) $(RULES) $(SORT_ALGORITHM) 
 
-
-SRCS = push_swap.c $(UTILS)
-
-BONUS_SRCS = checker.c $(UTILS)
-	
-	
+BONUS_UTILS = $(UTILS) \
+	utils/checker_utils/read_and_run.c utils/checker_utils/run_instruction.c 
 
 LIBFT_PATH = libft
 LIBFT = ${LIBFT_PATH}/libft.a
 
+SRCS = push_swap.c $(UTILS)
+BONUS_SRCS = checker.c $(BONUS_UTILS)
+
 OBJS = ${SRCS:.c=.o} 
 BONUS_OBJS = ${BONUS_SRCS:.c=.o} 
 
-all: $(NAME)
+
+all: $(NAME) $(BONUS_NAME)
 # all: 
 # 	cc push_swap.c utils/sort_algorithm/*.c utils/*.c utils/rules/*.c utils/expanded_libft/*.c utils/circ_list/*.c  libft/libft.a -o ./push_swap -Wall -Wextra -Werror
 # 	cc checker.c utils/sort_algorithm/*.c utils/*.c utils/rules/*.c utils/rules_checker/*.c utils/expanded_libft/*.c utils/circ_list/*.c  libft/libft.a -o ./mychecker -Wall -Wextra -Werror
 
-bonus: $(BONUS_NAME)
-
-.o: .c
-	$(CC) $(CFLAGS) -c $< -o $@
-
 $(NAME): $(OBJS)
-	${MAKE} ${LIBFT_PATH} bonus
-	cp ${LIBFT} $(NAME)
-	$(AR) $(NAME) $(OBJS)
+	${MAKE} ${LIBFT_PATH}
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+
+bonus: $(BONUS_NAME)
 
 $(BONUS_NAME): $(BONUS_OBJS)
 	${MAKE} ${LIBFT_PATH}
-	cp ${LIBFT} $(BONUS_NAME)
-	$(AR) $(BONUS_NAME) $(BONUS_OBJS)
+	$(CC) $(CFLAGS) $(BONUS_OBJS) $(LIBFT) -o $(BONUS_NAME)
+	
+.o: .c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	${MAKE} ${LIBFT_PATH} clean
@@ -84,6 +80,7 @@ clean:
 fclean: clean
 	${MAKE} ${LIBFT_PATH} fclean
 	${RM} ${OBJS} ${BONUS_OBJS}
+	${RM} ${NAME} ${BONUS_NAME}
 
 
 re: fclean all
