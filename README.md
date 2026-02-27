@@ -36,20 +36,20 @@ This project has a dual approach manner to identify the most effient way to sort
 
 Implemented a **Circular Doubly Linked List** to represent each stack because it allows ease of access to both head and tail, and makes all rotational operations extremely efficient.
 
-```c
-// Node structure
-typedef struct s_node {
-    int             value;
-    struct s_node   *next;
-    struct s_node   *prev;
-} t_node;
+  ```c
+  // Node structure
+  typedef struct s_node {
+      int             value;
+      struct s_node   *next;
+      struct s_node   *prev;
+  } t_node;
 
-// Stack structure
-typedef struct s_stack {
-    t_node  *head;
-    int     size;
-} t_stack;
-```
+  // Stack structure
+  typedef struct s_stack {
+      t_node  *head;
+      int     size;
+  } t_stack;
+  ```
 
 
 ---
@@ -214,14 +214,12 @@ make all && make clean
 
   - 100 Numbers
     ```bash
-    ARG=$(seq 1 100 | sort -R | head -n 5 | tr '\n' ' ')
-    ./push_swap $ARG | ./checker $ARG
+    ARG=$(seq 1 100 | shuf | tr '\n' ' '); ./push_swap $ARG | ./checker $ARG
     ```
 
   - 500 Numbers
     ```bash
-    ARG=$(seq 1 500 | sort -R | head -n 5 | tr '\n' ' ')
-    ./push_swap $ARG | ./checker $ARG
+    ARG=$(seq 1 500 | shuf | tr '\n' ' '); ./push_swap $ARG | ./checker $ARG
     ```
   
   - Inorder to count the moves presented by the program, we pipe it to `wc -l`
@@ -241,6 +239,7 @@ make all && make clean
 
 - [Push Swap Project Explained](https://42-cursus.gitbook.io/guide/2-rank-02/push_swap)
 - [Turk Algorithm Explanation](https://pure-forest.medium.com/push-swap-turk-algorithm-explained-in-6-steps-4c6650a458c0) - Visual & detailed breakdown of the algorithm
+- [The Art of Sorting with Two Stacks](https://www.linkedin.com/pulse/push-swap-art-sorting-two-stacks-anass-outiskte-bjsje) - Different Sort Algorithms and Reasoning
 - AI was utilized to generate edge cases and testing the code thoroughly.
 
 ---
