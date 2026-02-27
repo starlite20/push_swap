@@ -85,17 +85,29 @@ typedef struct s_stack {
 #### Circular List Management (`utils/circ_list/`)
 
 - **`stack_init()`** - Allocates and initializes a new empty stack
+
 - **`create_node(int value)`** - Allocates a new node with given value
+
 - **`stack_push(t_stack *stack, int value)`** - Pushes value to front of stack
+
 - **`stack_push_back(t_stack *stack, int value)`** - Pushes value to back of stack
+
 - **`stack_pop(t_stack *stack)`** - Removes and returns head value, updates links
+
 - **`stack_clear(t_stack **stack)`** - Frees all nodes and stack structure
+
 - **`stack_find_node(t_stack *stack, int value)`** - Searches for value and returns that node
+
 - **`stack_find_min(t_stack *stack)`** - Finds node with least value in the stack
+
 - **`stack_find_max(t_stack *stack)`** - Finds node with largest value in the stack
+
 - **`stack_node_distance(t_stack *stack, t_node *node)`** - Returns least distance to node from the head. If the closest path is backwards, the value returned will be negative.
+
 - **`stack_node_is_forward(t_stack *stack, t_node *node)`** - Returns 1 if forward rotation is optimal, -1 if reverse, 0 if already at head
+
 - **`stack_rotate_till_reached(t_stack *stack, char stack_id, t_node *node)`** - Rotates stack until node is at head for the specified stack
+
 
 #### Input Validation (`utils/input_validator.c`)
 
@@ -109,20 +121,21 @@ typedef struct s_stack {
 
 - **`error_exit(t_stack *stack_a, t_stack *stack_b)`** - Cleanup and exit with "Error\n"
 
+
 #### Extended Library Functions (`utils/expanded_libft/`)
 
-- **`ft_atoll(const char *str, int *error)`** - Converts string to long long with error handling
-  - Checks for overflow/underflow
-  - Validates the entire string is numeric
-  - Sets error flag for invalid input
+- **`ft_atoll(const char *str, int *error)`** - Converts string to long long with checks for overflow and underflow
 
-- **`ft_is_just_number(char *str)`** - Validates string contains only digits (with optional +/- prefix)
+- **`ft_is_just_number(char *str)`** - Validates string contains only digits and signs
 
-- **`ft_min(int a, int b)` / `ft_max(int a, int b)`** - Return min/max of two integers
+- **`ft_min(int a, int b)`** - Return min of two integers
+
+- **`ft_max(int a, int b)`** - Return max of two integers
 
 - **`ft_abs(int num)`** - Returns absolute value
 
 - **`ft_puterr_exit(void)`** - Prints "Error\n" to stderr and exits
+
 
 #### Sorting Helpers (`utils/sort_algorithm/`)
 
@@ -132,60 +145,40 @@ typedef struct s_stack {
 
 - **`find_spot_in_b(t_stack *b, int value_to_push)`** - Finds where value belongs in sorted Stack B
 
-- **`rotate_and_move(t_stack *a, t_stack *b, t_node *node_to_push_from_a)`** - Optimized rotation for Turk algorithm
-  - Checks if both stacks can rotate together (rr/rrr)
-  - Falls back to individual rotations
-  - Pushes element to B
+- **`rotate_and_move(t_stack *a, t_stack *b, t_node *node_to_push_from_a)`** - Optimized rotation for Turk algorithm by ensuring if both stacks can rotate together, then we do so as much as possible, then return to individual rotations, then pushes element to B
 
-- **`update_min_node(...)`** - Updates cheapest node tracker
+- **`find_cheapest_node(t_stack *a, t_stack *b, int nodes_traversed)`** - Iterates through all nodes in A and calculates cost to push each to B, returning node with minimum total cost
 
-- **`find_cheapest_node(t_stack *a, t_stack *b, int nodes_traversed)`** - Core of Turk algorithm
-  - Iterates through all nodes in A
-  - Calculates cost to push each to B
-  - Returns node with minimum total cost
 
 #### Operation Rules (`utils/rules/`)
-
-All operations follow the same pattern:
-1. Check for valid stack(s) and minimum size
-2. Perform the linked list manipulation
-3. Print operation name to stdout
 
 - **`swap.c`** - `sa`, `sb`, `ss` implementations
 - **`push.c`** - `pa`, `pb` implementations
 - **`rotate.c`** - `ra`, `rb`, `rr` implementations
 - **`rev_rotate.c`** - `rra`, `rrb`, `rrr` implementations
 
+
+#### Checker Utils (`utils/checker_utils/`)
+
+- **`read_and_run.c`** - Gets each line of command, and calls run instruction accordingly.
+- **`run_instruction.c`** - Runs all valid commands, otherwise returns 0 to indicate error.
+
+
+#### Operation Rules for Checker (`utils/rules_checker/`)
+
+- **`swap.c`** - `sa_silent`, `sb_silent`, `ss_silent` implementations
+- **`push.c`** - `pa_silent`, `pb_silent` implementations
+- **`rotate.c`** - `ra_silent`, `rb_silent`, `rr_silent` implementations
+- **`rev_rotate.c`** - `rra_silent`, `rrb_silent`, `rrr_silent` implementations
+
+
+#### Standard Library (`libft/`)
+- This project includes the **libft** library which provides standard C library functions along with ft_printf & get_next_line programs as well. 
+
+
 ---
 
-### Standard Library (`libft/`)
 
-This project includes the 42 **libft** library which provides standard C library functions. These are standard implementations and not documented here. Key functions used:
-
-- `ft_split()` - Split strings by delimiter
-- `ft_putstr_fd()` - Write strings to file descriptors
-- `ft_isdigit()` - Character checking
-- Memory management: `malloc`, `free`
-- String functions
-
----
-
-
-
-
-
-
-
-
-## Recap: What You Need
-
-Before running this project, ensure you have:
-
-- **Compiler:** `cc` or `gcc` with C99 support
-- **Arguments:** A list of integers (can be space-separated or multiple arguments)
-- **Checker:** The provided `checker_OS` binary for verification
-
----
 
 ## Instructions
 
