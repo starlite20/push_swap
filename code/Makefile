@@ -6,7 +6,7 @@
 #    By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/19 19:14:16 by ssujaude          #+#    #+#              #
-#    Updated: 2026/02/27 03:00:48 by ssujaude         ###   ########.fr        #
+#    Updated: 2026/02/28 02:58:31 by ssujaude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,10 +55,7 @@ OBJS = ${SRCS:.c=.o}
 BONUS_OBJS = ${BONUS_SRCS:.c=.o} 
 
 
-all: $(NAME) $(BONUS_NAME)
-# all: 
-# 	cc push_swap.c utils/sort_algorithm/*.c utils/*.c utils/rules/*.c utils/expanded_libft/*.c utils/circ_list/*.c  libft/libft.a -o ./push_swap -Wall -Wextra -Werror
-# 	cc checker.c utils/sort_algorithm/*.c utils/*.c utils/rules/*.c utils/rules_checker/*.c utils/expanded_libft/*.c utils/circ_list/*.c  libft/libft.a -o ./mychecker -Wall -Wextra -Werror
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	${MAKE} ${LIBFT_PATH}
