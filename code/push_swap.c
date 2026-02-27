@@ -6,7 +6,7 @@
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 01:01:01 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/27 00:08:21 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/28 02:08:27 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,17 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 
-	stack_a = NULL;
-	stack_b = NULL;
-	if (argc > 2)
-	{
-		stack_a = stack_init();
-		stack_b = stack_init();
-		if (!stack_a || !stack_b)
-			error_exit(stack_a, stack_b);
-		if (validate_and_store(stack_a, argc, argv) != 1)
-			error_exit(stack_a, stack_b);
+	if (argc < 2)
+		return (0);
+	stack_a = stack_init();
+	stack_b = stack_init();
+	if (!stack_a || !stack_b)
+		error_exit(stack_a, stack_b);
+	if (validate_and_store(stack_a, argc, argv) != 1)
+		error_exit(stack_a, stack_b);
+	if (stack_a->size > 1)
 		sort_stack(stack_a, stack_b);
-		stack_clear(&stack_a);
-		stack_clear(&stack_b);
-	}
+	stack_clear(&stack_a);
+	stack_clear(&stack_b);
 	return (0);
 }

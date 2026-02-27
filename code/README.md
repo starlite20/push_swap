@@ -239,35 +239,9 @@ make all && make clean
 
 ## Resources
 
-### Documentation
-
 - [Push Swap Project Explained](https://42-cursus.gitbook.io/guide/2-rank-02/push_swap)
 - [Turk Algorithm Explanation](https://pure-forest.medium.com/push-swap-turk-algorithm-explained-in-6-steps-4c6650a458c0) - Visual & detailed breakdown of the algorithm
 - AI was utilized to generate edge cases and testing the code thoroughly.
 
 ---
-
-
-
-### Edge Cases to Test
-
-```bash
-# Already sorted
-./push_swap 1 2 3 4 5
-
-# Reverse sorted
-./push_swap 5 4 3 2 1
-
-# Duplicates (should error)
-./push_swap 1 2 2 3
-
-# Non-numeric (should error)
-./push_swap 1 a 3
-
-# Integer overflow (should error)
-./push_swap 2147483648
-
-# Empty (should do nothing)
-./push_swap
-```
 

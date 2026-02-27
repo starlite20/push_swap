@@ -6,7 +6,7 @@
 /*   By: ssujaude <ssujaude@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 01:01:38 by ssujaude          #+#    #+#             */
-/*   Updated: 2026/02/27 02:59:18 by ssujaude         ###   ########.fr       */
+/*   Updated: 2026/02/28 02:09:07 by ssujaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_node				*find_cheapest_node(t_stack *a, t_stack *b,
 						int nodes_traversed);
 void				turk_sort(t_stack *a, t_stack *b);
 
-int	read_and_run(t_stack *a, t_stack *b);
-int	run_instruction(t_stack *a, t_stack *b, char *instruction);
+int					read_and_run(t_stack *a, t_stack *b);
+int					run_instruction(t_stack *a, t_stack *b, char *instruction);
 
 #endif
